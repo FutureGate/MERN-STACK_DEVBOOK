@@ -11,7 +11,6 @@ module.exports = function validateProfileInput(data) {
     data.status = !isEmpty(data.status) ? data.status : '';
     data.skills = !isEmpty(data.skills) ? data.skills : '';
 
-    
 
     if(!Validator.isLength(data.handle, { min: ProfileInfoLimit.profileHandleMinLength, max: ProfileInfoLimit.profileHandleMaxLength})) {
         errors.handle = "프로필 명을 " + ProfileInfoLimit.profileHandleMinLength + " ~ " + ProfileInfoLimit.profileHandleMaxLength + " 자 내로 입력해주세요.";
@@ -22,22 +21,16 @@ module.exports = function validateProfileInput(data) {
     }
 
     if(Validator.isEmpty(data.status)) {
-        errors.status = "직업을 입력하세요.";
+        errors.status = "직업을 선택해주세요.";
     }
 
     if(Validator.isEmpty(data.skills)) {
-        errors.skills = "기술을 입력해주세요.";
+        errors.skills = "사용하시는 언어를 입력해주세요.";
     }
 
     if(!isEmpty(data.website)) {
         if(!Validator.isURL(data.website)) {
             errors.website = "입력하신 웹사이트 주소가 유효하지 않습니다.";
-        }
-    }
-
-    if(!isEmpty(data.youtube)) {
-        if(!Validator.isURL(data.youtube)) {
-            errors.youtube = "입력하신 유튜브 주소가 유효하지 않습니다.";
         }
     }
 
@@ -56,6 +49,12 @@ module.exports = function validateProfileInput(data) {
     if(!isEmpty(data.linkedin)) {
         if(!Validator.isURL(data.linkedin)) {
             errors.linkedin = "입력하신 링크드인 주소가 유효하지 않습니다.";
+        }
+    }
+
+    if(!isEmpty(data.youtube)) {
+        if(!Validator.isURL(data.youtube)) {
+            errors.youtube = "입력하신 유튜브 주소가 유효하지 않습니다.";
         }
     }
 
