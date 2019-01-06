@@ -72,6 +72,7 @@ router.get('/handle/:handle', (req, res) => {
     const errors = {};
 
     Profile.findOne({ handle: req.params.handle })
+    .populate('user', ['name', 'avatar'])
     .then(profile => {
         if(!profile) {
             errors.noprofile = " 해당 프로필이 존재하지 않습니다.";
@@ -134,7 +135,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 
     // SNS 정보 파트        < 참고 > SNS 정보 모델은 오브젝트로 되어있음
     profileFields.social = {};
-    if(req.body.youtube) profileFields.social.youtube = req.body.handle;
+    if(req.body.youtube) profileFields.social.youtube = req.body.youtube;
     if(req.body.twitter) profileFields.social.twitter = req.body.twitter;
     if(req.body.facebook) profileFields.social.facebook = req.body.facebook;
     if(req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;

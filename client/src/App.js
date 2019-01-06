@@ -10,6 +10,8 @@ import { setCurrentUser, logoutUser } from './actions/authActions';
 
 import PrivateRoute from './components/common/PrivateRoute';
 
+import 'moment-timezone';
+
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Landing from './components/layout/Landing';
@@ -20,6 +22,8 @@ import CreateProfile from './components/create-profile/CreateProfile';
 import EditProfile from './components/edit-profile/EditProfile';
 import AddExperience from './components/add-credentials/AddExperience';
 import Profiles from './components/profiles/Profiles';
+import Profile from './components/profile/Profile';
+import Posts from './components/posts/Posts';
 
 import './App.css';
 import { decode } from 'punycode';
@@ -61,6 +65,7 @@ class App extends Component {
                   <Route exact path="/register" component={ Register } />
                   <Route exact path="/login" component={ Login } />
                   <Route exact path="/profiles" component={ Profiles } />
+                  <Route exact path="/profile/:handle" component={ Profile } />
 
                   <Switch>
                     <PrivateRoute exact path="/dashboard" component={ Dashborad } />
@@ -77,6 +82,12 @@ class App extends Component {
                   <Switch>
                     <PrivateRoute exact path="/add-experience" component={ AddExperience } />
                   </Switch>
+
+                  <Switch>
+                    <PrivateRoute exact path="/posts" component={ Posts } />
+                  </Switch>
+
+
                 </div>
               <Footer />
             </div>

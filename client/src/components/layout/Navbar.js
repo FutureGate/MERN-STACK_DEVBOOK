@@ -47,10 +47,10 @@ class Navbar extends Component {
             <div>
                     <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                        <Link className="nav-link" to="register">회원가입</Link>
+                        <Link className="nav-link" to="/register">회원가입</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="login">로그인</Link>
+                        <Link className="nav-link" to="/login">로그인</Link>
                     </li>
                 </ul>
             </div>
@@ -68,7 +68,10 @@ class Navbar extends Component {
                 <div className="collapse navbar-collapse" id="mobile-nav">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
-                            <Link className="nav-link" to="profiles">개발자 목록</Link>
+                            <Link className="nav-link" to="/profiles">개발자 목록</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/posts">포스트 피드</Link>
                         </li>
                     </ul>
                 

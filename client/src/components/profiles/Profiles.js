@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 
 import Spinner from '../common/Spinner';
 
+// eslint-disable-next-line
+import profileItem from './ProfileItem';
+
 import { getProfiles } from '../../actions/profileActions';
+import ProfileItem from './ProfileItem';
 
 class Profiles extends Component {
     componentDidMount() {
@@ -20,7 +24,9 @@ class Profiles extends Component {
             profileItems = <Spinner />;
         } else {
             if(profiles.length > 0) {
-                profileItems = <h1>profiles here</h1>;
+                profileItems = profiles.map(profile => (
+                    <ProfileItem key={ profile._id } profile={ profile } />
+                ));
             } else { 
                 profileItems = <h4>등록된 프로필이 없습니다.</h4>
             }

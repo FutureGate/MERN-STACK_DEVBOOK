@@ -10,11 +10,11 @@ module.exports = function validatePostInput(data) {
     data.text = !isEmpty(data.text) ? data.text : '';
 
     if(!Validator.isLength(data.text, {min: PostInfoLimit.postMinLength, max: PostInfoLimit.postMaxLength})) {
-        errors.text = "글은 " + PostInfoLimit.postMaxLength + "자 까지만 작성 가능합니다.";
+        errors.text = "내용은 " + PostInfoLimit.postMaxLength + "자 까지만 작성 가능합니다.";
     }
 
     if(Validator.isEmpty(data.text)) {
-        errors.text = "글을 입력해주세요.";
+        errors.text = "내용을 입력해주세요.";
     }
 
     return {

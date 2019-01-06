@@ -66,17 +66,18 @@ class EditProfile extends Component {
             // 각 필드에 불러온 정보를 입력
             this.setState({
                 handle: profile.handle,
+                company: profile.company,
                 website: profile.website,
                 location: profile.location,
                 bio: profile.bio,
                 githubusername: profile.githubusername,
                 status: profile.status,
                 skills: skillsCSV,
-                twitter: profile.twitter,
-                facebook: profile.facebook,
-                linkedin: profile.linkedin,
-                youtube: profile.youtube,
-                instagram: profile.instagram
+                twitter: profile.social.twitter,
+                facebook: profile.social.facebook,
+                linkedin: profile.social.linkedin,
+                youtube: profile.social.youtube,
+                instagram: profile.social.instagram
             });
         }
     }

@@ -17,6 +17,19 @@ export const getCurrentProfile = () => dispatch => {
         }))
 }
 
+// /profile/프로필 이름 으로 프로필 얻기
+export const getProfileByHandle = (handle) => dispatch => {
+    axios.get(`/api/profile/handle/${handle}`)
+        .then(res => dispatch({
+            type: GET_PROFILE,
+            payload: res.data
+        }))
+        .catch(err => dispatch({
+            type: GET_PROFILE,
+            payload: null
+        }))
+}
+
 export const getProfiles = () => dispatch => {
     dispatch(setProfileLoading());
 
@@ -83,3 +96,4 @@ export const addExperience = (expData, history) => dispatch => {
             payload: err.response.data
         }))
 }
+
