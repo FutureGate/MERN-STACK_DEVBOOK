@@ -26,35 +26,36 @@ import Profile from './components/profile/Profile';
 import Posts from './components/posts/Posts';
 
 import './App.css';
-import { decode } from 'punycode';
+
 import { clearCurrentProfile } from './actions/profileActions';
 
-if (localStorage.jwtToken) {
-  setAuthToken(localStorage.jwtToken);
 
-  const decoded = jwt_decode(localStorage.jwtToken);
-
-  // 사용자 설정 및 인증여부 설정
-  store.dispatch(setCurrentUser(decoded));
-
-  // 토큰이 만료되었는지 검사
-  const currentTime = Date.now() / 1000;
-  
-  if(decode.exp < currentTime) {
-     store.dispatch(logoutUser());
-     store.dispatch(clearCurrentProfile());
-     
-    // 현재 프로필 초기화
-    
-    window.location.href = "/";
-  }
-
-}
 
 class App extends Component {
     //토큰 체크
     
     render() {
+      if (localStorage.getItem("jwtToken")) {
+
+        setAuthToken(localStorage.getItem("jwtToken"));
+      
+        const decoded = jwt_decode(localStorage.getItem("jwtToken"));
+      
+        // 사용자 설정 및 인증여부 설정
+        store.dispatch(setCurrentUser(decoded));
+      
+        // 토큰이 만료되었는지 검사
+        const currentTime = Date.now() / 1000;
+
+        if(decoded.exp < currentTime) {
+           store.dispatch(logoutUser());
+           store.dispatch(clearCurrentProfile());
+           
+          // 현재 프로필 초기화
+          window.location.href = "/";
+        }
+      }
+
       return (
         <Provider store={ store }>
           <Router>
@@ -66,6 +67,7 @@ class App extends Component {
                   <Route exact path="/login" component={ Login } />
                   <Route exact path="/profiles" component={ Profiles } />
                   <Route exact path="/profile/:handle" component={ Profile } />
+                  <Route exact path="/profile/id/:id" component={ Profile } />
 
                   <Switch>
                     <PrivateRoute exact path="/dashboard" component={ Dashborad } />

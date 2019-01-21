@@ -74,25 +74,10 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 // @desc    게시물 삭제 (ID로 서치)
 // @access  Public
 router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
-    Profile.findOne({ user: req.user.id })
-        .then(profile => {
-            Post.findById(req.params.id)
-                .then(post => {
-                    if(post.user.toString() !== req.user.id) {
-                        return res.status(401).json({
-                            notAuthorized: "권한이 없습니다."
-                        });
-                    }
-
-                    post.remove()
-                        .then(() => res.json({
-                            success: true
-                        }))
-                })
-                .catch(err => res.status(404).json({
-                    noPostFound: "해당하는 글이 없습니다."
-                }));
-        });
+    Post.findOneAndRemove({ _id: req.params.id })
+        .then(() => res.json({
+            success: true
+        }));
 });
 
 
@@ -172,7 +157,7 @@ router.post('/comment/:id', passport.authenticate('jwt', { session: false }), (r
                 user: req.user.id
             }
 
-            post.comments.unshift(newComment);
+            post.comments.push(newComment);
 
             post.save()
             .then(post => res.json(post));

@@ -29,8 +29,6 @@ class Login extends Component {
             this.props.history.push('/dashboard');
         }
         
-        console.log(this.state);
-
         if(nextProps.errors) {
             this.setState({
                 errors: nextProps.errors

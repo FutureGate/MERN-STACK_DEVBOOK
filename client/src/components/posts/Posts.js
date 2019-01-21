@@ -21,8 +21,7 @@ class Posts extends Component {
 
         if(posts === null || loading) {
             postContent = <Spinner />
-        } else { 
-            console.log(posts);
+        } else {
             postContent = <PostFeed posts={posts} />;
         }
 

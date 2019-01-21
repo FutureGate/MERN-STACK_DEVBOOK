@@ -17,10 +17,6 @@ const ProfileActions = (data) => {
                 <Link to="/add-experience" className="btn btn-light">
                   <i className="fab fa-black-tie text-info mr-1"></i>
                   경력 추가</Link>
-                  
-                <Link to="/add-education" className="btn btn-light">
-                  <i className="fas fa-graduation-cap text-info mr-1"></i>
-                  학력 추가</Link>
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { GET_PROFILE, GET_PROFILES, PROFILE_LOADING, CLEAR_CURRENT_PROFILE, GET_ERRORS, SET_CURRENT_USER } from './types';
+import { logoutUser } from './authActions';
 
 // 현재 사용자의 프로필 얻기
 export const getCurrentProfile = () => dispatch => {
@@ -15,6 +16,18 @@ export const getCurrentProfile = () => dispatch => {
             type: GET_PROFILE,
             payload: {}
         }))
+}
+
+export const getProfileByID = (id) => dispatch => {
+    axios.get(`/api/profile/id/${id}`)
+        .then(res => dispatch({
+            type: GET_PROFILE,
+            payload: res.data
+        }))
+        .catch(err => dispatch({
+            type:GET_PROFILE,
+            payload: {}
+        }));
 }
 
 // /profile/프로필 이름 으로 프로필 얻기
@@ -71,20 +84,19 @@ export const clearCurrentProfile = () => {
 
 // 계정 삭제 & 프로필 삭제
 export const deleteAccount = () => dispatch => {
-    if(window.confirm("계정을 삭제하시겠습니까? 되돌릴 수 없습니다.")) {
-        console.log("!!");
-        axios.delete('/api/users/unregister')
-            .then(res => dispatch({
-                type: SET_CURRENT_USER,
-                payload: {}
-            })
-            )
-            .catch(err => dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-            })
-            );
-    }
+    axios.delete('/api/users/unregister')
+        .then(dispatch(logoutUser()))
+        .then(dispatch(clearCurrentProfile()))
+        .then(res => dispatch({
+            type: SET_CURRENT_USER,
+            payload: {}
+        })
+        )
+        .catch(err => dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+        })
+    );
 }
 
 // 경력 추가

@@ -10,13 +10,17 @@ import ProfileGithub from './ProfileGithub';
 
 import Spinner from '../common/Spinner';
 
-import { getProfileByHandle } from '../../actions/profileActions';
+import { getProfileByHandle, getProfileByID } from '../../actions/profileActions';
 
 class Profile extends Component {
 
     componentDidMount() {
-        if(this.props.match.params.handle) {
-            this.props.getProfileByHandle(this.props.match.params.handle);
+        if(this.props.match.path.includes("id")) {
+            this.props.getProfileByID(this.props.match.params.id);
+        } else {
+            if(this.props.match.params.handle) {
+                this.props.getProfileByHandle(this.props.match.params.handle);
+            }
         }
     }
 
@@ -80,4 +84,4 @@ const mapStateToProps = (state) => ({
     profile: state.profile
 });
 
-export default connect(mapStateToProps, { getProfileByHandle })(Profile);
+export default connect(mapStateToProps, { getProfileByHandle, getProfileByID })(Profile);
