@@ -1,7 +1,8 @@
 # MERN-STACK_DevBook_SNS
 
 MERN 스택 기반으로 제작된 SNS 사이트 입니다.
-> MERN 스택 이란?
+<br/>
+> MERN 스택 이란? <br/>
 > MongoDB, Express.js, React.js, Node.js 를 사용한 프로젝트
 
 <br/>
